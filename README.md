@@ -1,0 +1,1 @@
+# TedalaMarlet Shopify Theme
