@@ -1,4 +1,4 @@
-{% for product in collections.frontpage.products limit:4 %}
+{% for product in collections.frontpage.products limit:10 %}
   <div>
     <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
     {{ product.price | money }}
@@ -8,3 +8,4 @@
     </a>
   </div>
 {% endfor %}
+<h1>Tedala Market</h1>
