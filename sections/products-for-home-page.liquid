@@ -1,0 +1,43 @@
+{% for product in collections.frontpage.products limit:10 %}
+<div>
+  <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+  {{ product.price | money }}
+  {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+  <a href="{{ product.url | within: collection }}">
+    <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+  </a>
+</div>
+{% endfor %}
+<div class="container pt-4">
+  <h1>Products</h1>
+  <ul>
+    {% for collection in collections %}
+    <h3>
+      {{collection.products_count}}
+      {% if collection.products_count >1 %}
+      Products
+      {% else %}
+      Product
+      {% endif %}
+      in {{collection.title}}
+    </h3>
+
+    <ul>
+      {% for item in collection.products %}
+        <li>
+          <p>{{item.title}}</p>
+          <a href="{{item.url}}">Buy</a>
+          <br>
+        </li>
+      {% endfor %}
+    </ul>
+    {% endfor %}
+
+    {% for product in collections.products.products %}
+    <li>{{product.title}}</li>
+    {% endfor %}
+
+
+
+  </ul>
+</div>
