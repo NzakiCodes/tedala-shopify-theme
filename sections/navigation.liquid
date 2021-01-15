@@ -1,15 +1,23 @@
 <!-- Shop Navigation -->
-
+{% stylesheet %}
+.dropdown-menu {
+    left: -120px!important;
+    
+}
+.mega-dropdown-column {
+    width: 13.5rem!important;
+}
+{% endstylesheet %}
 <li class="nav-item dropdown ">
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Shop</a>
     <div class="dropdown-menu p-0">
-        <div class="d-flex flex-wrap flex-md-nowrap px-2">
-            <div class="mega-dropdown-column py-4 px-3">
+        <div class="d-flex flex-wrap flex-md-nowrap px-4 py-2">
+            <div class="mega-dropdown-column py-1 ">
                 <div class="widget widget-links mb-3">
-                    <h6 class="font-size-base mb-3">BABIES & KIDS </h6>
-                    {% assign beauty_personal_care = collections | where: 'template_suffix','baby-kids' %}
+                    <h6 class="font-size-base mb-3">{{'BABIES & KIDS' | capitalize}}</h6>
+                    {% assign baby-kids = collections | where: 'template_suffix','baby-kids' %}
                     <ul class="widget-list">
-                        {% for collection in beauty_personal_care %}
+                        {% for collection in baby-kids %}
                         <li class="widget-list-item pb-1">
                             <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title}}</a>
                         </li>
@@ -17,7 +25,7 @@
                     </ul>
                 </div>
                 <div class="widget widget-links">
-                    <h6 class="font-size-base mb-3">BEAUTY & PERSONAL CARE </h6>
+                    <h6 class="font-size-base mb-3">{{'BEAUTY & PERSONAL CARE' | capitalize}} </h6>
                     {% assign beauty_personal_care = collections | where: 'template_suffix','beauty-personal_care' %}
                     <ul class="widget-list">
                         {% for collection in beauty_personal_care %}
@@ -27,61 +35,177 @@
                         {% endfor %}
                     </ul>
                 </div>
-            </div>
-            <div class="mega-dropdown-column py-4 px-3">
                 <div class="widget widget-links">
-                    <h6 class="font-size-base mb-3">Shop pages</h6>
+                    <h6 class="font-size-base mb-3">{{'HEALTH AND WELLNESS' | capitalize }} </h6>
+                    {% assign health-and-wellness = collections | where: 'template_suffix','health-and-wellness' %}
                     <ul class="widget-list">
-                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="shop-categories.html">Shop
-                                Categories</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="shop-single-v1.html">Product
-                                Page v.1</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="shop-single-v2.html">Product
-                                Page v.2</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="shop-cart.html">Cart</a>
+                        {% for collection in health-and-wellness %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
                         </li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="checkout-details.html">Checkout - Details</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="checkout-shipping.html">Checkout - Shipping</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="checkout-payment.html">Checkout - Payment</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="checkout-review.html">Checkout - Review</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="checkout-complete.html">Checkout - Complete</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="order-tracking.html">Order
-                                Tracking</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="comparison.html">Product
-                                Comparison</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
+                
             </div>
-            <div class="mega-dropdown-column py-4 pr-3">
-                <div class="widget widget-links mb-3">
-                    <h6 class="font-size-base mb-3">Grocery store</h6>
+            <div class="mega-dropdown-column py-1">
+               <div class="widget widget-links mb-3">
+                    <h6 class="font-size-base mb-3">{{'BEVERAGES' | capitalize}}</h6>
+                    {% assign beverages = collections | where: 'template_suffix','beverages' %}
                     <ul class="widget-list">
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="grocery-catalog.html">Product Catalog</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link" href="grocery-single.html">Single
-                                Product Page</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="grocery-checkout.html">Checkout</a></li>
+                        {% for collection in beverages %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="widget widget-links">
-                    <h6 class="font-size-base mb-3">Food Delivery</h6>
+                    <h6 class="font-size-base mb-3">{{'CANDY & CHOCOLATE' | capitalize}} </h6>
+                    {% assign candy-chocolate = collections | where: 'template_suffix','candy-chocolate' %}
                     <ul class="widget-list">
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="food-delivery-category.html">Category Page</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="food-delivery-single.html">Single Item (Restaurant)</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="food-delivery-cart.html">Cart (Your Order)</a></li>
-                        <li class="widget-list-item pb-1"><a class="widget-list-link"
-                                href="food-delivery-checkout.html">Checkout (Address &amp; Payment)</a></li>
+                        {% for collection in candy-chocolate %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
+            </div> 
+            <div class="mega-dropdown-column py-1 ">
+                <div class="widget widget-links mb-3">
+                    <h6 class="font-size-base mb-3">{{'CANNED & PACKAGE FOOD' | capitalize }}</h6>
+                    {% assign canned-package-food = collections | where: 'template_suffix','canned-package-food' %}
+                    <ul class="widget-list">
+                        {% for collection in canned-package-food %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-links">
+                    <h6 class="font-size-base mb-3">{{'BREAKFAST, CEREALS & GRANOLAS' | capitalize}}</h6>
+                    {% assign breakfast-cereals-granolas = collections | where: 'template_suffix','breakfast-cereals-granolas' %}
+                    <ul class="widget-list">
+                        {% for collection in breakfast-cereals-granolas %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+            </div>
+             <div class="mega-dropdown-column py-1">
+                <div class="widget widget-links mb-3">
+                    <h6 class="font-size-base mb-3">{{'CONDIMENTS & SAUCES ' | capitalize}}</h6>
+                    {% assign condiments-sauces = collections | where: 'template_suffix','condiments-sauces' %}
+                    <ul class="widget-list">
+                        {% for collection in condiments-sauces %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-links">
+                    <h6 class="font-size-base mb-3">{{'DRIED FISH & STOCKFISH' | capitalize}} </h6>
+                    {% assign dried_fish_stockfish = collections | where: 'template_suffix','dried-fish-stockfish' %}
+                    <ul class="widget-list">
+                        {% for collection in dried_fish_stockfish %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-links">
+                    <h6 class="font-size-base mb-3">{{'PANTRY' | capitalize }} </h6>
+                    {% assign pantry = collections | where: 'template_suffix','pantry' %}
+                    <ul class="widget-list">
+                        {% for collection in pantry %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                
+            </div>
+            <div class="mega-dropdown-column py-1 ">
+                <div class="widget widget-links mb-3">
+                    <h6 class="font-size-base mb-3">{{'GRAINS & PASTA' | capitalize}}</h6>
+                    {% assign grains-pasta = collections | where: 'template_suffix','grains-pasta' %}
+                    <ul class="widget-list">
+                        {% for collection in grains-pasta %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-links">
+                    <h6 class="font-size-base mb-3">{{'HONEY & SWEETENERS ' | capitalize }} </h6>
+                    {% assign honey-sweeteners = collections | where: 'template_suffix','honey-sweeteners' %}
+                    <ul class="widget-list">
+                        {% for collection in honey-sweeteners %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-links">
+                    <h6 class="font-size-base mb-3">{{'OILS & VINEGARS ' | capitalize }} </h6>
+                    {% assign oils-vinegars = collections | where: 'template_suffix','oils-vinegars' %}
+                    <ul class="widget-list">
+                        {% for collection in oils-vinegars %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+               
+                
+            </div>
+            <div class="mega-dropdown-column py-1 ">
+                <div class="widget widget-links mb-3">
+                    <h6 class="font-size-base mb-3">{{'MEAT & SEAFOOD' | capitalize}}</h6>
+                    {% assign meat-seafood = collections | where: 'template_suffix','meat-seafood' %}
+                    <ul class="widget-list">
+                        {% for collection in meat-seafood %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-links">
+                    <h6 class="font-size-base mb-3">{{'SNACKS' | capitalize }} </h6>
+                    {% assign snacks = collections | where: 'template_suffix','snacks' %}
+                    <ul class="widget-list">
+                        {% for collection in snacks %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="widget widget-links">
+                    <h6 class="font-size-base mb-3">{{'SPICE, SEASONING & SALT ' | capitalize }} </h6>
+                    {% assign spice-seasoning-salt = collections | where: 'template_suffix','spice-seasoning-salt' %}
+                    <ul class="widget-list">
+                        {% for collection in spice-seasoning-salt %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+               
+                
             </div>
         </div>
     </div>
