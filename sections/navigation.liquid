@@ -37,9 +37,9 @@
                 </div>
                 <div class="widget widget-links">
                     <h6 class="font-size-base mb-3">{{'HEALTH AND WELLNESS' | capitalize }} </h6>
-                    {% assign health-and-wellness = collections | where: 'template_suffix','health-and-wellness' %}
+                    {% assign health-wellness = collections | where: 'template_suffix','health-wellness' %}
                     <ul class="widget-list">
-                        {% for collection in health-and-wellness %}
+                        {% for collection in health-wellness %}
                         <li class="widget-list-item pb-1">
                             <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
                         </li>
