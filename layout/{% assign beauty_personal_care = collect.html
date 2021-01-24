@@ -1,0 +1,9 @@
+{% assign beauty_personal_care = collections | where: 'template_suffix','beauty-personal_care' %}
+<ul>
+    {% for collection in beauty_personal_care %}
+    <a href="{{ collection.url }}">
+        {{collection.title}}
+    </a>
+    </h3>
+
+{% endfor %}

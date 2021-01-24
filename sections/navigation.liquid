@@ -140,7 +140,7 @@
                     <ul class="widget-list">
                         {% for collection in grains-pasta %}
                         <li class="widget-list-item pb-1">
-                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title}}</a>
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
                         </li>
                         {% endfor %}
                     </ul>
@@ -177,7 +177,7 @@
                     <ul class="widget-list">
                         {% for collection in meat-seafood %}
                         <li class="widget-list-item pb-1">
-                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title}}</a>
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
                         </li>
                         {% endfor %}
                     </ul>

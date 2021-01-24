@@ -8,11 +8,11 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  <link rel="stylesheet" media="screen" href="vendor/simplebar/dist/simplebar.min.css" />
-  <link rel="stylesheet" media="screen" href="vendor/tiny-slider/dist/tiny-slider.css" />
-  <link rel="stylesheet" media="screen" href="https://cdn.bootcdn.net/ajax/libs/noUiSlider/14.6.0/nouislider.css" />
-  <link rel="stylesheet" media="screen" href="vendor/drift-zoom/dist/drift-basic.min.css" />
-
+  <link rel="stylesheet" media="screen" href="{{'simplebar.min.css' | asset_url }}" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.min.css" integrity="sha512-06CZo7raVnbbD3BlY8/hGUoUCuhk8sTdVGV3m3nuh9i2R+UmkLbLRTE/My8TuJ3ALbDulhBObJQWtOUt0mXzNQ==" crossorigin="anonymous" />
+  <link rel="stylesheet" media="screen" href="{{ 'nouislider.cs'| asset_url }}" />
+  <link rel="stylesheet" media="screen" href="{{ 'drift-basic.min.css' | asset_url }}" />
+  <link rel="shortcut icon" href="https://cdn.shopify.com/s/files/1/0261/1340/9060/files/TedalaMarket_Approved_logo_Transparent_1.png?v=1595012870" type="image/x-icon">
   <!-- CSS only -->
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
@@ -23,13 +23,13 @@
   {{ 'application.js' | asset_url | script_tag }}
 </head>
 
-<body>
+<body  class="toolbar-enabled">
 
 
 
   <header class="box-shadow-sm">
     <!-- Topbar-->
-    <div class="topbar topbar-dark bg-dark">
+    <!-- <div class="topbar topbar-dark bg-dark">
       <div class="container">
         <div class="topbar-text dropdown d-md-none"><a class="topbar-link dropdown-toggle" href="#"
             data-toggle="dropdown">Useful links</a>
@@ -54,7 +54,7 @@
         <div class="ml-3 text-nowrap"><a class="topbar-link mr-4 d-none d-md-inline-block" href="order-tracking.html"><i
               class="czi-location"></i>Order tracking</a>
           <div class="topbar-text dropdown disable-autohide"><a class="topbar-link dropdown-toggle" href="#"
-              data-toggle="dropdown"><img class="mr-2" width="20" src="img/flags/en.png" alt="English" />Eng / $</a>
+              data-toggle="dropdown"><img class="mr-2" width="20" src="{{'en.png' | asset_img_url: 'small'}}" alt="English" />Eng / $</a>
             <ul class="dropdown-menu dropdown-menu-right">
               <li class="dropdown-item">
                 <select class="custom-select custom-select-sm">
@@ -64,17 +64,27 @@
                   <option value="jpy">¥ JPY</option>
                 </select>
               </li>
-              <li><a class="dropdown-item pb-1" href="#"><img class="mr-2" width="20" src="img/flags/fr.png"
-                    alt="Français" />Français</a></li>
-              <li><a class="dropdown-item pb-1" href="#"><img class="mr-2" width="20" src="img/flags/de.png"
-                    alt="Deutsch" />Deutsch</a></li>
-              <li><a class="dropdown-item" href="#"><img class="mr-2" width="20" src="img/flags/it.png"
-                    alt="Italiano" />Italiano</a></li>
+              <li>
+                <a class="dropdown-item pb-1" href="#">
+                <img class="mr-2" width="20" src="{{'fr.png' | asset_url }}" alt="Français" />Français</a>
+              </li>
+              <li>
+                <a class="dropdown-item pb-1" href="#">
+                  <img class="mr-2" width="20" src="{{'de.png' | asset_url }}" alt="Deutsch" />
+                  Deutsch
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#">
+                  <img class="mr-2" width="20" src="{{'it.png' | asset_url }}" alt="Italiano" />'
+                  Italiano
+                </a>
+              </li>
             </ul>
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
     <div class="navbar-sticky bg-light">
       <div class="navbar navbar-expand-lg navbar-light">
@@ -146,7 +156,7 @@
                       </div>
                     </div>
                     {% endfor %}
-                    </div>
+                  </div>
                   <a class="btn btn-primary btn-sm btn-block" href="/cart"><i
                       class="czi-card mr-2 font-size-base align-middle"></i>Checkout</a>
                 </div>
@@ -247,19 +257,7 @@
             <!-- Primary menu-->
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
-                {% for link in linklists.main-menu_1.links %}
-                {% assign child_list_handle = link.title | handleize %}
-                {% if linklists[child_list_handle].links != blank %}
-                <a href="{{ link.url }}">{{ link.title }}</a>
-                [{% for childlink in linklists[child_list_handle].links %}
-
-                <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-
-                {% endfor %}]
-                {% else %}
-
-                {% endif %}
-                {% endfor %}
+              
                 <a class="nav-link active" aria-current="page" href="{{'/'}}">{{'home' | capitalize }}</a>
                 <!-- <ul class="dropdown-menu">
                   <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
@@ -315,7 +313,13 @@
                 </ul> -->
               </li>
               {% section 'navigation' %}
-
+              
+              {% for link in linklists.main-menu.links %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
+              </li>
+              {% endfor %}
+             
               <li class="nav-item">
                 <a class="nav-link" href="/cart">Cart</a>
               </li>
@@ -478,6 +482,8 @@
   </header>
 
   <br>
+  {% render 'breadcrumbs' %}
+  
   <!-- <h1>Links</h1>
   {% for link in linklists.main-menu.links %}
   <li class="nav-item">
@@ -489,15 +495,7 @@
   <main role="main">
     {{ content_for_layout }}
   </main>
-  <!-- Vendor scrits: js libraries and plugins-->
-  <script src="https://cartzilla.createx.studio/vendor/jquery/dist/jquery.slim.min.js"></script>
-  <script src="https://cartzilla.createx.studio/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cartzilla.createx.studio/vendor/bs-custom-file-input/dist/bs-custom-file-input.min.js"></script>
-  <script src="https://cartzilla.createx.studio/vendor/simplebar/dist/simplebar.min.js"></script>
-  <script src="https://cartzilla.createx.studio/vendor/tiny-slider/dist/min/tiny-slider.js"></script>
-  <script src="https://cartzilla.createx.studio/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-  <script src="https://cartzilla.createx.studio/vendor/nouislider/distribute/nouislider.min.js"></script>
-
+  {% section 'footer' %}
 </body>
 
 </html>

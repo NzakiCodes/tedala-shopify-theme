@@ -1,17 +1,65 @@
-{% for collection in collections %}
-  {% unless collection.handle == 'frontpage' %}
+<div class="container pb-3">
+  <div class="row  rounded-lg">
+    {% for collection in collections %}
+    {% unless collection.handle == 'frontpage' %}
     {% capture collection_title %}{{ collection.title | escape }}{% endcapture %}
-    <a href="{{ collection.url }}">More {{ collection_title }} &rsaquo;</a>
-    {% for product in collection.products limit:5 %}
-      {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
-      <div>
-        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-        {{ product.price | money }}
-        {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+  
+    {% for product in collection.products  %}
+    {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 py-1 px-3">
+      <div class="card text-center product-card pb-1 py-3 px-3">
         <a href="{{ product.url | within: collection }}">
           <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
         </a>
+        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        {{ product.price | money }}
+        {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
       </div>
+    </div>
     {% endfor %}
-  {% endunless %}
-{% endfor %}
+  
+  
+    {% endunless %}
+    {% endfor %}
+  </div>
+</div>
+
+<div class="row  rounded-lg">
+
+  {% for product in products limit: 8 %}
+  <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 py-1 px-3">
+    <div class="card text-center product-card pb-1 py-3 px-3">
+      <span class="badge badge-danger badge-shadow">Sale</span>
+      <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left"
+        title="Add to wishlist">
+        <i class="czi-heart"></i>
+      </button>
+      <a class="card-img-top d-block overflow-hidden" href="{{ product.url | within: collection }}">
+        <img src="{{ product.featured_image.src | img_url: 'small' }}" alt="Product"></a>
+      <div class="card-body py-2">
+        <span>
+          {% for collection in product.collections %}
+          {{ collection.title }}
+          {% endfor %}
+        </span>
+        <a class="product-meta d-block font-size-xs pb-1" href="#">{{ product.collections.title | capitalize}}</a>
+        <h3 class="product-title font-size-sm">
+          <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        </h3>
+        <div class="product-price"><span class="text-accent">{{ product.price | money }}</span>
+          <!-- <del class="font-size-sm text-muted">$2.<small>99</small></del> -->
+        </div>
+      </div>
+      <div class="product-floating-btn">
+        <a href="{{ product.url | within: collection}}" class="btn btn-primary btn-shadow btn-sm" type="submit"
+          name="add" id="AddToCart" data-toggle="toast" data-target="#cart-toast">+<i
+            class="czi-cart font-size-base ml-1"></i></a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- </div>
+  </div> -->
+</section>
