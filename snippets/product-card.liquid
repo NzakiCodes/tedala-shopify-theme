@@ -1,0 +1,33 @@
+<!-- Horizontal card layout -->
+<div class="card m-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+        <div class="col-sm-4 p-3">
+            {% assign image = product.featured_image %}
+            <img src="{{ image | img_url: " medium" }}" class="rounded-left" alt="{{ image.alt }}">
+        </div>
+        <div class="col-sm-8">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <a href="{{ product.url }}">{{ product.title }}</a>
+                </h5>
+                <h6>{{ product.price | money }}</h6>
+                <p class="card-text font-size-sm text-muted">{{ product.description }}</p>
+
+                <div class="btn-group mr-2 mb-2" role="group" aria-label="Apply settings">
+                    <div class="btn-group mb-2" role="group" aria-label="">
+                       
+                        
+                    </div>
+                </div>
+                <div class="btn-toolbar" role="toolbar" aria-label="Settings toolbar">
+                    <div class="btn-group mr-2 mb-2" role="group" aria-label="Add to Cart">
+                        <a href="{{ product.url }}" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                    <div class="btn-group m-2   " role="group" aria-label="Remove From Wishlist">
+                      {%- render 'button-wishlist', product: product -%}
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>

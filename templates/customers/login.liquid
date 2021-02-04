@@ -1,1 +1,40 @@
-<!-- /templates/customers/login.liquid -->
+
+<div class="container" >
+    <div class="col-md-6 py-4" style="margin: auto;max-width:500px">
+        <div class="card border-0 box-shadow">
+          <div class="card-body">
+            <h2 class="h4 mb-1">Sign in</h2>
+            <hr>
+            <br>
+
+            <form method="post" action="/account/login" id="customer_login" accept-charset="UTF-8">
+            {{ form.errors | default_errors }}
+              <div class="input-group-overlay form-group">
+                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-mail"></i></span></div>
+                <input class="form-control prepended-form-control" placeholder="Email" type="email" name="customer[email]" required>
+              </div>
+              <div class="input-group-overlay form-group">
+                <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-locked"></i></span></div>
+                <div class="password-toggle">
+                  <input class="form-control prepended-form-control" placeholder="Password"  type="password" name="customer[password]" required>
+                  <label class="password-toggle-btn">
+                    <input class="custom-control-input" type="checkbox"><i class="czi-eye password-toggle-indicator"></i><span class="sr-only">Show password</span>
+                  </label>
+                </div>
+              </div>
+              <div class="d-flex flex-wrap justify-content-between">
+                <div class="custom-control custom-checkbox">
+                  <input class="custom-control-input" type="checkbox" checked id="remember_me">
+                  <label class="custom-control-label" for="remember_me">Remember me</label>
+                </div>
+                <a class="nav-link-inline font-size-sm" href="/account/reset_account">Forgot password?</a>
+              </div>
+              <hr class="mt-4">
+              <div class="text-right pt-4">
+                <button class="btn btn-primary" type="submit"><i class="czi-sign-in mr-2 ml-n21"></i>Sign In</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+</div>

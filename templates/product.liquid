@@ -66,8 +66,8 @@
             </div>
             <button class="btn btn-primary btn-shadow mr-3 mb-3" type="submit" name="add" id="AddToCart"><i
                 class="czi-cart font-size-lg mr-2"></i>Add to Cart</button>
-            <button class="btn btn-icon btn-secondary mb-3" type="submit" data-toggle="tooltip"
-              title="Add to Wishlist"><i class="czi-heart font-size-lg"></i></button>
+            {%- render 'button-wishlist', product: product -%}
+            
           </form>
 
         </div>

@@ -1,0 +1,22 @@
+{%- if product.handle != blank -%}
+<button class="btn-wishlist btn-sm custom-btn-sm" type="button" data-toggle="tooltip" data-placement="left" title="Add to wishlist"
+    aria-label="Add to wishlist" button-wishlist data-product-handle="{{ product.handle }}">
+    <style scoped>
+        .icon {
+            fill: transparent;
+            stroke: #424242;
+            transition: fill 0.3s ease;
+        }
+
+        .active .icon {
+            fill: #fe6700;
+            stroke: #424242;
+        }
+
+        .custom-btn-sm {
+            background-color: #fff !important;
+        }
+    </style>
+    {%- render 'icon-heart' -%}
+</button>
+{%- endif -%}

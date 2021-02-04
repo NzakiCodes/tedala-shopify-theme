@@ -1,22 +1,70 @@
-{% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
+<style>
+   strong.highlight{
+    color: #13be00!important;
+  }
+</style>
+
+<div class="container">
+  {% paginate search.results by 10 %}
+  <!-- <form action="/search" method="get" role="search">
     <input type="search" name="q" value="{{ search.terms | escape }}">
     <button type="submit">search</button>
-  </form>
+  </form> -->
+
+  <!-- {% if search.performed %}
+  {% for item in search.results %}
+  {% if item.featured_image %}
+
+  <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+    {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+  </a>
+  {% endif %}
+  <h5>{{ item.title | link_to: item.url }}</h5>
+  <p>{{ item.content | strip_html | truncatewords: 50 | highlight: search.terms }}</p>
+
+  {% else %}
+  no results
+  {% endfor %}
+  {% endif %} -->
+
+ 
+
 
   {% if search.performed %}
-    {% for item in search.results %}
-      {% if item.featured_image %}
+  {% for item in search.results %}
+  <div class="card py-3 my-3" style="max-width: 640px;">
+    <div class="row no-gutters">
+      <div class="col-sm-4">
+
+        {% if item.featured_image %}
+
         <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+          <img src="{{ item.featured_image.src | img_url: 'medium' }}" class="rounded-left"
+            alt="{{ item.featured_image.alt  }}">
         </a>
-      {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-    {% else %}
-      no results
-    {% endfor %}
+        {% endif %}
+      </div>
+      <div class="col-sm-8">
+        <div class="card-body">
+
+          <h5 class="card-title">
+            <a href="{{ item.url }}">{{ item.title }}</a>
+          </h5>
+          <p class="card-text font-size-sm text-muted">{{ item.content | strip_html | truncatewords: 50 | highlight:
+            search.terms }}</p>
+
+          <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}"
+            class="btn btn-sm btn-primary">Buy</a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  no results
+  {% endfor %}
   {% endif %}
 
   {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-{% endpaginate %}
+  {% endpaginate %}
+</div>

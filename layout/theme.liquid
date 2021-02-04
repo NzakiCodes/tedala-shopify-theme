@@ -9,10 +9,14 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   <link rel="stylesheet" media="screen" href="{{'simplebar.min.css' | asset_url }}" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.min.css" integrity="sha512-06CZo7raVnbbD3BlY8/hGUoUCuhk8sTdVGV3m3nuh9i2R+UmkLbLRTE/My8TuJ3ALbDulhBObJQWtOUt0mXzNQ==" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.min.css"
+    integrity="sha512-06CZo7raVnbbD3BlY8/hGUoUCuhk8sTdVGV3m3nuh9i2R+UmkLbLRTE/My8TuJ3ALbDulhBObJQWtOUt0mXzNQ=="
+    crossorigin="anonymous" />
   <link rel="stylesheet" media="screen" href="{{ 'nouislider.cs'| asset_url }}" />
   <link rel="stylesheet" media="screen" href="{{ 'drift-basic.min.css' | asset_url }}" />
-  <link rel="shortcut icon" href="https://cdn.shopify.com/s/files/1/0261/1340/9060/files/TedalaMarket_Approved_logo_Transparent_1.png?v=1595012870" type="image/x-icon">
+  <link rel="shortcut icon"
+    href="https://cdn.shopify.com/s/files/1/0261/1340/9060/files/TedalaMarket_Approved_logo_Transparent_1.png?v=1595012870"
+    type="image/x-icon">
   <!-- CSS only -->
   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous"> -->
@@ -21,9 +25,10 @@
   <!-- Header hook for plugins -->
   {{ 'application.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
+  <script src="{{ 'Wishlist.js' | asset_url }}" defer="defer"></script>
 </head>
 
-<body  class="toolbar-enabled">
+<body class="toolbar-enabled">
 
 
 
@@ -97,11 +102,13 @@
             <img width="74"
               src="https://cdn.shopify.com/s/files/1/0261/1340/9060/files/TedalaMarket_Approved_logo_Transparent_180x.png?v=1595012891"
               alt="TedalaMarket" /></a>
-          <div class="input-group-overlay d-none d-lg-flex mx-4">
-            <input class="form-control appended-form-control" type="text" placeholder="Search for products">
-            <div class="input-group-append-overlay"><span class="input-group-text"><i class="czi-search"></i></span>
-            </div>
-          </div>
+
+         
+            <form class="input-group-overlay d-none d-lg-flex mx-4" action="/search" method="get"> 
+              <input class="form-control appended-form-control" name="q" value="{{ search.terms | escape }}" type="text" placeholder="Search for products">
+              <div class="input-group-append-overlay"><span class="input-group-text"><i class="czi-search"></i></span>
+              </div>
+            </form>
           <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"><span
                 class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#"><span
@@ -109,19 +116,19 @@
               <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-menu"></i></div>
             </a>
 
-            <a class="navbar-tool d-none d-lg-flex" href="account-wishlist.html"><span
+            <a class="navbar-tool d-none d-lg-flex" href="/pages/wishlist"><span
                 class="navbar-tool-tooltip">Wishlist</span>
               <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-heart"></i></div>
             </a>
-
+ 
             {% if shop.customer_accounts_enabled %}
             {% if customer %}
-            <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="#signin-modal" data-toggle="modal">
+            <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="/account">
               <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
-              <div class="navbar-tool-text ml-n3"><small>Hello,</small>My Account</div>
+              <div class="navbar-tool-text ml-n3"><small>Hello,</small>{{ customer.name }}</div>
             </a>
             {% else %}
-            <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="#signin-modal" data-toggle="modal">
+            <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="/account/login" >
               <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
               <div class="navbar-tool-text ml-n3"><small>Hello, Sign in</small>My Account</div>
             </a>
@@ -129,8 +136,8 @@
             {% endif %}
 
             <div class="navbar-tool dropdown ml-3"><a class="navbar-tool-icon-box bg-secondary dropdown-toggle"
-                href="shop-cart.html"><span class="navbar-tool-label">{{ cart.item_count }}</span><i
-                  class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="shop-cart.html"><small>My
+                href="/cart"><span class="navbar-tool-label">{{ cart.item_count }}</span><i
+                  class="navbar-tool-icon czi-cart"></i></a><a class="navbar-tool-text" href="/cart"><small>My
                   Cart</small>{{ cart.total_price | money }}</a>
               <!-- Cart dropdown-->
               <div class="dropdown-menu dropdown-menu-right" style="width: 20rem;">
@@ -139,8 +146,10 @@
 
                     {% for item in cart.items %}
                     <div class="widget-cart-item pb-2 border-bottom">
-                      <button class="close text-danger" type="button" aria-label="Remove">
-                        <span aria-hidden="true">&times;</span></button>
+                      <a class="close text-danger" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" aria-label="Remove">
+                        <span aria-hidden="true">&times;</span>
+                      </a>
+
                       <div class="media align-items-center">
                         <a class="d-block mr-2" href="{{item.url}}">
                           {{ item | img_url: '100x100' | img_tag }}
@@ -172,154 +181,25 @@
             <div class="input-group-overlay d-lg-none my-3">
               <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-search"></i></span>
               </div>
-              <input class="form-control prepended-form-control" type="text" placeholder="Search for products">
+              <form action="/search" method="get">
+                <input class="form-control prepended-form-control" name="q" value="{{ search.terms | escape }}" type="text" placeholder="Search for products">
+              </form>
             </div>
-            <!-- Departments menu-->
-            <!-- <ul class="navbar-nav mega-nav pr-lg-2 mr-lg-2">
-              <li class="nav-item dropdown"><a class="nav-link dropdown-toggle pl-0" href="#" data-toggle="dropdown"><i
-                    class="czi-view-grid mr-2"></i>Departments</a>
-                <div class="dropdown-menu px-2 pl-0 pb-4">
-                  <div class="d-flex flex-wrap flex-md-nowrap">
-                    <div class="mega-dropdown-column pt-4 px-3">
-                      <div class="widget widget-links"><a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img
-                            src="img/shop/departments/01.jpg" alt="Shoes" /></a>
-                        <h6 class="font-size-base mb-2">Clothing</h6>
-                        <ul class="widget-list">
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Women's clothing</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Men's clothing</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Kid's clothing</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="mega-dropdown-column pt-4 px-3">
-                      <div class="widget widget-links"><a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img
-                            src="img/shop/departments/02.jpg" alt="Shoes" /></a>
-                        <h6 class="font-size-base mb-2">Shoes</h6>
-                        <ul class="widget-list">
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Women's shoes</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Men's shoes</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Kid's shoes</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="mega-dropdown-column pt-4 px-3">
-                      <div class="widget widget-links"><a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img
-                            src="img/shop/departments/03.jpg" alt="Shoes" /></a>
-                        <h6 class="font-size-base mb-2">Gadgets</h6>
-                        <ul class="widget-list">
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Smartphones &amp;
-                              Tablets</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Wearable gadgets</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">E-book readers</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="d-flex flex-wrap flex-md-nowrap">
-                    <div class="mega-dropdown-column pt-4 px-3">
-                      <div class="widget widget-links"><a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img
-                            src="img/shop/departments/04.jpg" alt="Shoes" /></a>
-                        <h6 class="font-size-base mb-2">Furniture &amp; Decor</h6>
-                        <ul class="widget-list">
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Home furniture</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Office furniture</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Lighting and decoration</a>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="mega-dropdown-column pt-4 px-3">
-                      <div class="widget widget-links"><a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img
-                            src="img/shop/departments/05.jpg" alt="Shoes" /></a>
-                        <h6 class="font-size-base mb-2">Accessories</h6>
-                        <ul class="widget-list">
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Hats</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Sunglasses</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Bags</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div class="mega-dropdown-column pt-4 px-3">
-                      <div class="widget widget-links"><a class="d-block overflow-hidden rounded-lg mb-3" href="#"><img
-                            src="img/shop/departments/06.jpg" alt="Shoes" /></a>
-                        <h6 class="font-size-base mb-2">Entertainment</h6>
-                        <ul class="widget-list">
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Kid's toys</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Video games</a></li>
-                          <li class="widget-list-item"><a class="widget-list-link" href="#">Outdoor / Camping</a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul> -->
             <!-- Primary menu-->
             <ul class="navbar-nav">
               <li class="nav-item dropdown">
-              
+
                 <a class="nav-link active" aria-current="page" href="{{'/'}}">{{'home' | capitalize }}</a>
-                <!-- <ul class="dropdown-menu">
-                  <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                      href="home-fashion-store-v1.html"><span class="d-block text-heading">Fashion Store
-                        v.1</span><small class="d-block text-muted">Classic shop layout</small></a>
-                    <div class="dropdown-menu h-100 animation-0 mt-0 p-3">
-                      <a class="d-block" href="home-fashion-store-v1.html" style="width: 250px;">
-                        <img src="img/home/preview/th01.jpg" alt="Fashion Store v.1" /></a>
-                    </div>
-                  </li>
-                  <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                      href="home-electronics-store.html"><span class="d-block text-heading">Electronics
-                        Store</span><small class="d-block text-muted">Slider + Promo banners</small></a>
-                    <div class="dropdown-menu h-100 animation-0 mt-0 p-3"><a class="d-block"
-                        href="home-electronics-store.html" style="width: 250px;"><img src="img/home/preview/th03.jpg"
-                          alt="Electronics Store" /></a></div>
-                  </li>
-                  <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                      href="home-marketplace.html"><span class="d-block text-heading">Marketplace</span><small
-                        class="d-block text-muted">Multi-vendor, digital goods</small></a>
-                    <div class="dropdown-menu h-100 animation-0 mt-0 p-3"><a class="d-block"
-                        href="home-marketplace.html" style="width: 250px;"><img src="img/home/preview/th04.jpg"
-                          alt="Marketplace" /></a></div>
-                  </li>
-                  <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                      href="home-grocery-store.html"><span class="d-block text-heading">Grocery Store</span><small
-                        class="d-block text-muted">Full width + Side menu</small></a>
-                    <div class="dropdown-menu h-100 animation-0 mt-0 p-3"><a class="d-block"
-                        href="home-grocery-store.html" style="width: 250px;"><img src="img/home/preview/th06.jpg"
-                          alt="Grocery Store" /></a></div>
-                  </li>
-                  <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                      href="home-food-delivery.html"><span class="d-block text-heading">Food Delivery
-                        Service</span><small class="d-block text-muted">Food &amp; Beverages delivery</small></a>
-                    <div class="dropdown-menu h-100 animation-0 mt-0 p-3"><a class="d-block"
-                        href="home-food-delivery.html" style="width: 250px;"><img src="img/home/preview/th07.jpg"
-                          alt="Food Delivery Service" /></a></div>
-                  </li>
-                  <li class="dropdown position-static mb-0"><a class="dropdown-item py-2 border-bottom"
-                      href="home-fashion-store-v2.html"><span class="d-block text-heading">Fashion Store
-                        v.2</span><small class="d-block text-muted">Slider + Featured categories</small></a>
-                    <div class="dropdown-menu h-100 animation-0 mt-0 p-3"><a class="d-block"
-                        href="home-fashion-store-v2.html" style="width: 250px;"><img src="img/home/preview/th02.jpg"
-                          alt="Fashion Store v.2" /></a></div>
-                  </li>
-                  <li class="dropdown position-static mb-0"><a class="dropdown-item py-2"
-                      href="home-single-store.html"><span class="d-block text-heading">Single Product Store</span><small
-                        class="d-block text-muted">Single product / mono brand</small></a>
-                    <div class="dropdown-menu h-100 animation-0 mt-0 p-3"><a class="d-block"
-                        href="home-single-store.html" style="width: 250px;"><img src="img/home/preview/th05.jpg"
-                          alt="Single Product / Brand Store" /></a></div>
-                  </li>
-                </ul> -->
+               
               </li>
               {% section 'navigation' %}
-              
+
               {% for link in linklists.main-menu.links %}
               <li class="nav-item">
                 <a class="nav-link" href="{{ link.url }}">{{ link.title }}</a>
               </li>
               {% endfor %}
-             
+
               <li class="nav-item">
                 <a class="nav-link" href="/cart">Cart</a>
               </li>
@@ -331,7 +211,8 @@
                 <a href="/account" class="nav-link">Account</a>
               </li>
               <li>
-                {{ 'Logout' | customer_logout_link }} </li>
+                {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="nav-link"' }} 
+              </li>
 
               {% else %}
               <li>
@@ -480,10 +361,8 @@
       </div>
     </div>
   </header>
-
-  <br>
   {% render 'breadcrumbs' %}
-  
+
   <!-- <h1>Links</h1>
   {% for link in linklists.main-menu.links %}
   <li class="nav-item">

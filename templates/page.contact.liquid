@@ -1,20 +1,56 @@
 <div class="container">
-  <h1>{{ page.title }}</h1>
-  <div>{{ page.content }}</div>
+  <div class="container">
+   <h1> {{ page.title }} </h1>
+  </div>
+  {{ page.content }}
 
-
-
-  {% form 'contact' %}
-  {% if form.posted_successfully? %} Thank you for your contact {% endif %}
-  {{ form.errors | default_errors }}
-  <label for="ContactFormName">name</label>
-  <input type="text" id="ContactFormName" name="contact[name]">
-  <label for="ContactFormEmail">email</label>
-  <input type="email" id="ContactFormEmail" name="contact[email]">
-  <label for="ContactFormPhone">phone</label>
-  <input type="tel" id="ContactFormPhone" name="contact[phone]">
-  <label for="ContactFormMessage">message</label>
-  <textarea rows="10" id="ContactFormMessage" name="contact[body]"></textarea>
-  <input type="submit" value="send">
-  {% endform %}
+<div class="container-fluid px-0 mb-4" id="map">
+  <div class="row no-gutters">
+    <div class="col-lg-6 iframe-full-height-wrap">
+      <iframe class="iframe-full-height" width="600" height="250" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3100.4813672313476!2d-76.90454768500267!3d39.00433147955431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89b7c3ef66f26e1b%3A0x58ef7fee4da73861!2s9181%20Springhill%20Ln%2C%20Greenbelt%2C%20MD%2020770%2C%20USA!5e0!3m2!1sen!2sng!4v1611667678612!5m2!1sen!2sng"></iframe>
+    </div>
+    <div class="col-lg-6 px-4 px-xl-5 py-5 border-top">
+        <h2>GET IN TOUCH</h2>
+        <h4>We'd Love to Hear From You, Lets Get In Touch!</h4>
+      {% form 'contact' %}
+      {% if form.posted_successfully? %} Thank you for your contact {% endif %}
+      {{ form.errors | default_errors }}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="ContactFormName">Your name:&nbsp;<span class="text-danger">*</span></label>
+              <input class="form-control" type="text" name="contact[name]" id="ContactFormName" placeholder="John Doe" required>
+              <div class="invalid-feedback">Please fill in you name!</div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="ContactFormEmail">Email address:&nbsp;<span class="text-danger">*</span></label>
+              <input class="form-control" type="email" name="contact[email]" id="ContactFormEmail" placeholder="johndoe@email.com" required>
+              <div class="invalid-feedback">Please provide valid email address!</div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="ContactFormPhone">Your phone:&nbsp;<span class="text-danger">*</span></label>
+              <input class="form-control" type="text" name="contact[phone]" id="ContactFormPhone" placeholder="+1 (212) 00 000 000" required>
+              <div class="invalid-feedback">Please provide valid phone number!</div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label for="cf-subject">Subject:</label>
+              <input class="form-control" type="text" id="cf-subject" name="contact[subject]" placeholder="Provide short title of your request">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="ContactFormMessage">Message:&nbsp;<span class="text-danger">*</span></label>
+          <textarea class="form-control" id="ContactFormMessage" name="contact[message]" rows="6" placeholder="Please describe in detail your request" required></textarea>
+          <div class="invalid-feedback">Please write a message!</div>
+        </div>
+        <button class="btn btn-primary" type="submit">Send message</button>
+        {% endform %}
+    </div>
+  </div>
 </div>

@@ -8,6 +8,7 @@
     {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 py-1 px-3">
       <div class="card text-center product-card pb-1 py-3 px-3">
+        {%- render 'button-wishlist', product: product -%}
         <a href="{{ product.url | within: collection }}">
           <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
         </a>
@@ -30,10 +31,8 @@
   <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 py-1 px-3">
     <div class="card text-center product-card pb-1 py-3 px-3">
       <span class="badge badge-danger badge-shadow">Sale</span>
-      <button class="btn-wishlist btn-sm" type="button" data-toggle="tooltip" data-placement="left"
-        title="Add to wishlist">
-        <i class="czi-heart"></i>
-      </button>
+      {%- render 'button-wishlist', product: product -%}
+
       <a class="card-img-top d-block overflow-hidden" href="{{ product.url | within: collection }}">
         <img src="{{ product.featured_image.src | img_url: 'small' }}" alt="Product"></a>
       <div class="card-body py-2">

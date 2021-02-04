@@ -1,22 +1,57 @@
-{% paginate blog.articles by 5 %}
-
-<h1>{{ blog.title }}</h1>
-{% for article in blog.articles %}
-  <div>
-    <h2><a href="{{ article.url }}">{{ article.title }}</a></h2>
-    {{ article.author }} @ {{ article.created_at }}
-    <div>
-      {% if article.excerpt.size > 0 %}
-        {{ article.excerpt }}
-      {% else %}
-        <p>{{ article.content | strip_html | truncatewords: 100 }}</p>
+<div class="container">
+  <h1>{{ blog.title }}</h1>
+<div class="cz-masonry-grid" data-columns="3">
+  {% paginate blog.articles by 5 %}
+  {% for article in blog.articles %}
+  <article class="grid-item">
+    <div class="card">
+      {% if article.image %}
+        <a class="blog-entry-thumb" href="blog-single.html">
+          <img class="card-img-top" src="{{ article.image.src | img_url: '500x' }}" alt="{{ article.image.alt }}">
+        </a>
       {% endif %}
+      
+      <div class="card-body">
+        <h2 class="h6 blog-entry-title">
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        </h2>
+       
+  
+        {% if article.excerpt.size > 0 %}
+        <p class="font-size-sm">{{ article.excerpt }}</p>
+        {% else %}
+        <p class="font-size-sm">{{ article.content | strip_html | truncatewords: 30 }}</p>
+        {% endif %}
+  
+        {% for tag in article.tags %}
+        <a class="btn-tag mr-2 mb-2" href="">{{ tag }}</a>
+        {% endfor %} 
+  
+      </div>
+
+      <div class="card-footer d-flex align-items-center font-size-xs">
+        <a class="blog-entry-meta-link" href="#">
+          <div class="blog-entry-author-ava">
+            
+            {% if article.user.image %} 
+            <img src="{{ article.user.image | img_url: '200x200' }}" alt="{{ article.author }}">
+            {% endif %}
+          </div>{{ article.author }}</a>
+        <div class="ml-auto text-nowrap">
+          <a class="blog-entry-meta-link text-nowrap" href="#">{{ article.created_at | date: "%a, %b %d, %y" }}</a>
+          <span class="blog-entry-meta-divider mx-2"></span>
+          {% if article.comments_enabled? %}
+          <a class="blog-entry-meta-link text-nowrap" href="{{ article.comment_post_url }}"><i class="czi-message"></i>{{ article.comments_count }}</a>
+          {% endif %}
+          </div>
+      </div>
     </div>
+  </article>
+  {% endfor %}
+  {% endpaginate %}
+  
+  {% if paginate.pages > 1 %}
+    {{ paginate | default_pagination }}
+  {% endif %}
   </div>
-{% endfor %}
-
-{% if paginate.pages > 1 %}
-  {{ paginate | default_pagination }}
-{% endif %}
-
-{% endpaginate %}
+</div>

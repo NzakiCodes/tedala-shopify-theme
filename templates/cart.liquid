@@ -1,46 +1,135 @@
-{% if cart.item_count > 0 %}
-  <h1>Cart</h1>
-  <form action="/cart" method="post" novalidate>
-    <table>
-      <thead>
-        <th colspan="2">Prod</th>
-        <th>Price</th>
-        <th>Qty</th>
-        <th>total</th>
-      </thead>
-      <tbody>
-        {% for item in cart.items %}
-          <tr>
-            <td>
-              <a href="{{ item.url | within: collections.all }}">
+<style>
+  body{
+    background-color: #ffffff!important;
+  }
+</style>
+
+<div class="page-title-overlap bg-dark pt-4">
+  <div class="container d-lg-flex justify-content-between py-2 py-lg-3">
+    <div class="order-lg-2 mb-3 mb-lg-0 pt-lg-2">
+     {% include 'breadcrumbs-cart' %}
+    </div>
+    <div class="order-lg-1 pr-lg-4 text-center text-lg-left">
+      <h1 class="h2 text-light mb-0">Your Cart</h1>
+    </div>
+  </div>
+</div>
+<!-- Page Content-->
+<div class="container pb-5 mb-2 mb-md-4">
+  {% if cart.item_count > 0 %}
+    <form action="/cart" method="post">
+      <div class="row">
+        <!-- List of items-->
+        <section class="col-lg-8">
+          <div class="d-flex justify-content-between align-items-center pt-3 pb-2 pb-sm-5 mt-1">
+            <h2 class="h6 text-light mb-0">Products</h2>
+            <a class="btn btn-outline-primary btn-sm pl-2" href="/products"><i class="czi-arrow-left mr-2"></i>Continue shopping</a>
+          </div>
+          {% for item in cart.items %}
+
+          <!-- Item-->
+          <div class="d-sm-flex justify-content-between align-items-center my-4 pb-3 border-bottom">
+            <div class="media media-ie-fix d-block d-sm-flex align-items-center text-center text-sm-left">
+              <a class="d-inline-block mx-auto mr-sm-4" href="{{ item.url | within: collections.all }}" style="width: 10rem;">
                 <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
               </a>
-            </td>
-            <td>
-              <a href="{{ item.url }}">{{ item.product.title }}</a>
-              {{ item.variant.title }}
-              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
-            </td>
-            <td>{{ item.price | money }}</td>
-            <td>
-              <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-            </td>
-            <td>
-              {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
-              {{ item.line_price | money }}
-              {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    <div>
-      <p>sub total : {{ cart.total_price | money }}</p>
-      <button type="submit" name="update">Update</button>
-      <button type="submit" name="checkout">Checkout</button>
-    </div>
-  </form>
-{% else %}
-  <h2>cart</h2>
-  Cart is empty
-{% endif %}
+              <div class="media-body pt-2">
+                <h3 class="product-title font-size-base mb-2">
+                  <a href="{{ item.url }}">{{ item.product.title }}</a>
+                </h3>
+                <!-- <div class="font-size-sm"><span class="text-muted mr-2">Size:</span>8.5</div>
+                <div class="font-size-sm"><span class="text-muted mr-2">Color:</span>White &amp; Blue</div> -->
+                <div class="font-size-lg text-accent pt-2">{{ item.price | money }}</div>
+              </div>
+            </div>
+            <div class="pt-2 pt-sm-0 pl-sm-3 mx-auto mx-sm-0 text-center text-sm-left" style="max-width: 9rem;">
+              <div class="form-group mb-0">
+                <label class="font-weight-medium" for="updates_{{ item.key }}">Quantity</label>
+                <input class="form-control" type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+              </div>
+              <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0" class="btn btn-link px-0 text-danger"><i class="czi-close-circle mr-2"></i><span class="font-size-sm">Remove</span></a>
+            </div>
+          </div>
+
+          {% endfor %}
+          <button class="btn btn-outline-accent btn-block" type="submit" name="update"><i class="czi-loading font-size-base mr-2"></i>Update cart</button>
+        </section>
+        
+        <!-- Sidebar-->
+        <aside class="col-lg-4 pt-4 pt-lg-0">
+          <div class="cz-sidebar-static rounded-lg box-shadow-lg ml-lg-auto">
+            <div class="text-center mb-4 pb-3 border-bottom">
+              <h2 class="h6 mb-3 pb-1">Subtotal</h2>
+              <h3 class="font-weight-normal">{{ cart.total_price | money }}</h3>
+            </div>
+            <div class="form-group mb-4">
+              <label class="mb-3" for="order-comments"><span class="badge badge-info font-size-xs mr-2">Note</span><span class="font-weight-medium">Additional comments</span></label>
+              <textarea class="form-control" rows="6" id="order-comments"></textarea>
+            </div>
+            <div class="accordion" id="order-options">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="accordion-heading"><a href="#promo-code" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="promo-code">Apply promo code<span class="accordion-indicator"></span></a></h3>
+                </div>
+                <!-- <div class="collapse show" id="promo-code" data-parent="#order-options">
+                  <form class="card-body needs-validation" method="post" novalidate>
+                    <div class="form-group">
+                      <input class="form-control" type="text" placeholder="Promo code" required>
+                      <div class="invalid-feedback">Please provide promo code.</div>
+                    </div>
+                    <button class="btn btn-outline-primary btn-block" type="submit">Apply promo code</button>
+                  </form>
+                </div> -->
+              </div>
+              <div class="card disabled">
+                <div class="card-header">
+                  <h3 class="accordion-heading"><a class="collapsed" href="#shipping-estimates" role="button" data-toggle="collapse" aria-expanded="true" aria-controls="shipping-estimates">Shipping estimates<span class="accordion-indicator"></span></a></h3>
+                </div>
+                <!-- <div class="collapse" id="shipping-estimates" data-parent="#order-options">
+                  <div class="card-body">
+                    <form class="needs-validation" novalidate>
+                      <div class="form-group">
+                        <select class="form-control custom-select" required>
+                          <option value="">Choose your country</option>
+                          <option value="Australia">Australia</option>
+                          <option value="Belgium">Belgium</option>
+                          <option value="Canada">Canada</option>
+                          <option value="Finland">Finland</option>
+                          <option value="Mexico">Mexico</option>
+                          <option value="New Zealand">New Zealand</option>
+                          <option value="Switzerland">Switzerland</option>
+                          <option value="United States">United States</option>
+                        </select>
+                        <div class="invalid-feedback">Please choose your country!</div>
+                      </div>
+                      <div class="form-group">
+                        <select class="form-control custom-select" required>
+                          <option value="">Choose your city</option>
+                          <option value="Bern">Bern</option>
+                          <option value="Brussels">Brussels</option>
+                          <option value="Canberra">Canberra</option>
+                          <option value="Helsinki">Helsinki</option>
+                          <option value="Mexico City">Mexico City</option>
+                          <option value="Ottawa">Ottawa</option>
+                          <option value="Washington D.C.">Washington D.C.</option>
+                          <option value="Wellington">Wellington</option>
+                        </select>
+                        <div class="invalid-feedback">Please choose your city!</div>
+                      </div>
+                      <div class="form-group">
+                        <input class="form-control" type="text" placeholder="ZIP / Postal code" required>
+                        <div class="invalid-feedback">Please provide a valid zip!</div>
+                      </div>
+                      <button class="btn btn-outline-primary btn-block" type="submit">Calculate shipping</button>
+                    </form>
+                  </div>
+                </div> -->
+              </div>
+            </div>
+            <button class="btn btn-primary btn-shadow btn-block mt-4"  type="submit" name="checkout"><i class="czi-card font-size-lg mr-2"></i>Proceed to Checkout</a>
+          </div>
+        </aside>
+      </div>
+    </form>
+  {% endif %}
+</div>
