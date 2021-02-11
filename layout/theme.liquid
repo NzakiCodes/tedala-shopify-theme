@@ -9,9 +9,8 @@
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   <link rel="stylesheet" media="screen" href="{{'simplebar.min.css' | asset_url }}" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.9.3/tiny-slider.min.css"
-    integrity="sha512-06CZo7raVnbbD3BlY8/hGUoUCuhk8sTdVGV3m3nuh9i2R+UmkLbLRTE/My8TuJ3ALbDulhBObJQWtOUt0mXzNQ=="
-    crossorigin="anonymous" />
+  <link rel="stylesheet" media="screen" href="{{'tiny-slider.css' | asset_url }}" />
+  
   <link rel="stylesheet" media="screen" href="{{ 'nouislider.cs'| asset_url }}" />
   <link rel="stylesheet" media="screen" href="{{ 'drift-basic.min.css' | asset_url }}" />
   <link rel="shortcut icon"
@@ -23,6 +22,7 @@
 
   {{ content_for_header }}
   <!-- Header hook for plugins -->
+  {{ 'theme.min.css' | asset_url | stylesheet_tag }}
   {{ 'application.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
   <script src="{{ 'Wishlist.js' | asset_url }}" defer="defer"></script>
@@ -32,7 +32,7 @@
 
 
 
-  <header class="box-shadow-sm">
+  <header class="box-shadow-sm" style="z-index: 100!important;">
     <!-- Topbar-->
     <!-- <div class="topbar topbar-dark bg-dark">
       <div class="container">
@@ -91,7 +91,7 @@
       </div>
     </div> -->
     <!-- Remove "navbar-sticky" class to make navigation bar scrollable with the page.-->
-    <div class="navbar-sticky bg-light">
+    <div class="fixed-top bg-light">
       <div class="navbar navbar-expand-lg navbar-light">
         <div class="container">
           <a class="navbar-brand d-none d-sm-block mr-3 flex-shrink-0" href="/" style="min-width: 7rem;">
@@ -103,12 +103,13 @@
               src="https://cdn.shopify.com/s/files/1/0261/1340/9060/files/TedalaMarket_Approved_logo_Transparent_180x.png?v=1595012891"
               alt="TedalaMarket" /></a>
 
-         
-            <form class="input-group-overlay d-none d-lg-flex mx-4" action="/search" method="get"> 
-              <input class="form-control appended-form-control" name="q" value="{{ search.terms | escape }}" type="text" placeholder="Search for products">
-              <div class="input-group-append-overlay"><span class="input-group-text"><i class="czi-search"></i></span>
-              </div>
-            </form>
+
+          <form class="input-group-overlay d-none d-lg-flex mx-4" action="/search" method="get">
+            <input class="form-control appended-form-control" name="q" value="{{ search.terms | escape }}" type="text"
+              placeholder="Search for products">
+            <div class="input-group-append-overlay"><span class="input-group-text"><i class="czi-search"></i></span>
+            </div>
+          </form>
           <div class="navbar-toolbar d-flex flex-shrink-0 align-items-center">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"><span
                 class="navbar-toggler-icon"></span></button><a class="navbar-tool navbar-stuck-toggler" href="#"><span
@@ -120,7 +121,7 @@
                 class="navbar-tool-tooltip">Wishlist</span>
               <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-heart"></i></div>
             </a>
- 
+
             {% if shop.customer_accounts_enabled %}
             {% if customer %}
             <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="/account">
@@ -128,7 +129,7 @@
               <div class="navbar-tool-text ml-n3"><small>Hello,</small>{{ customer.name }}</div>
             </a>
             {% else %}
-            <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="/account/login" >
+            <a class="navbar-tool ml-1 ml-lg-0 mr-n1 mr-lg-2" href="/account/login">
               <div class="navbar-tool-icon-box"><i class="navbar-tool-icon czi-user"></i></div>
               <div class="navbar-tool-text ml-n3"><small>Hello, Sign in</small>My Account</div>
             </a>
@@ -146,7 +147,8 @@
 
                     {% for item in cart.items %}
                     <div class="widget-cart-item pb-2 border-bottom">
-                      <a class="close text-danger" href="/cart/change?line={{ forloop.index }}&amp;quantity=0" aria-label="Remove">
+                      <a class="close text-danger" href="/cart/change?line={{ forloop.index }}&amp;quantity=0"
+                        aria-label="Remove">
                         <span aria-hidden="true">&times;</span>
                       </a>
 
@@ -182,7 +184,8 @@
               <div class="input-group-prepend-overlay"><span class="input-group-text"><i class="czi-search"></i></span>
               </div>
               <form action="/search" method="get">
-                <input class="form-control prepended-form-control" name="q" value="{{ search.terms | escape }}" type="text" placeholder="Search for products">
+                <input class="form-control prepended-form-control" name="q" value="{{ search.terms | escape }}"
+                  type="text" placeholder="Search for products">
               </form>
             </div>
             <!-- Primary menu-->
@@ -190,7 +193,7 @@
               <li class="nav-item dropdown">
 
                 <a class="nav-link active" aria-current="page" href="{{'/'}}">{{'home' | capitalize }}</a>
-               
+
               </li>
               {% section 'navigation' %}
 
@@ -211,10 +214,9 @@
                 <a href="/account" class="nav-link">Account</a>
               </li>
               <li>
-                {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="nav-link"' }} 
-              </li>
+                {{ 'Logout' | customer_logout_link | replace: '<a', '<a class="nav-link"' }} </li>
 
-              {% else %}
+                  {% else %}
               <li>
                 {{ 'Login '| capitalize | customer_login_link | replace: '<a', '<a class="nav-link"' }} </li>
               <li>
@@ -223,144 +225,15 @@
                   {% endif %}
               </li>
               <li class="nav-item dropdown">
-                <!-- <a class="nav-link dropdown-toggle" href="#"
-                  data-toggle="dropdown">Account</a> -->
-                <!-- <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Shop
-                      User Account</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="account-orders.html">Orders History</a></li>
-                      <li><a class="dropdown-item" href="account-profile.html">Profile Settings</a></li>
-                      <li><a class="dropdown-item" href="account-address.html">Account Addresses</a></li>
-                      <li><a class="dropdown-item" href="account-payment.html">Payment Methods</a></li>
-                      <li><a class="dropdown-item" href="account-wishlist.html">Wishlist</a></li>
-                      <li><a class="dropdown-item" href="account-tickets.html">My Tickets</a></li>
-                      <li><a class="dropdown-item" href="account-single-ticket.html">Single Ticket</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Vendor
-                      Dashboard</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="dashboard-settings.html">Settings</a></li>
-                      <li><a class="dropdown-item" href="dashboard-purchases.html">Purchases</a></li>
-                      <li><a class="dropdown-item" href="dashboard-favorites.html">Favorites</a></li>
-                      <li><a class="dropdown-item" href="dashboard-sales.html">Sales</a></li>
-                      <li><a class="dropdown-item" href="dashboard-products.html">Products</a></li>
-                      <li><a class="dropdown-item" href="dashboard-add-new-product.html">Add New Product</a></li>
-                      <li><a class="dropdown-item" href="dashboard-payouts.html">Payouts</a></li>
-                    </ul>
-                  </li>
-                  <li><a class="dropdown-item" href="account-signin.html">Sign In / Sign Up</a></li>
-                  <li><a class="dropdown-item" href="account-password-recovery.html">Password Recovery</a></li>
-                </ul> -->
               </li>
-              <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#"
-                  data-toggle="dropdown">Pages</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Navbar
-                      Variants</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="navbar-1-level-light.html">1 Level Light</a></li>
-                      <li><a class="dropdown-item" href="navbar-1-level-dark.html">1 Level Dark</a></li>
-                      <li><a class="dropdown-item" href="navbar-2-level-light.html">2 Level Light</a></li>
-                      <li><a class="dropdown-item" href="navbar-2-level-dark.html">2 Level Dark</a></li>
-                      <li><a class="dropdown-item" href="navbar-3-level-light.html">3 Level Light</a></li>
-                      <li><a class="dropdown-item" href="navbar-3-level-dark.html">3 Level Dark</a></li>
-                      <li><a class="dropdown-item" href="home-electronics-store.html">Electronics Store</a></li>
-                      <li><a class="dropdown-item" href="home-marketplace.html">Marketplace</a></li>
-                      <li><a class="dropdown-item" href="home-grocery-store.html">Side Menu (Grocery)</a></li>
-                      <li><a class="dropdown-item" href="home-single-store.html">Transparent</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="about.html">About Us</a></li>
-                  <li><a class="dropdown-item" href="contacts.html">Contacts</a></li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Help
-                      Center</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="help-topics.html">Help Topics</a></li>
-                      <li><a class="dropdown-item" href="help-single-topic.html">Single Topic</a></li>
-                      <li><a class="dropdown-item" href="help-submit-request.html">Submit a Request</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">404 Not
-                      Found</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="404-simple.html">404 - Simple Text</a></li>
-                      <li><a class="dropdown-item" href="404-illustration.html">404 - Illustration</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li> -->
-              <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Blog</a>
-                <ul class="dropdown-menu">
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Blog
-                      List Layouts</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="blog-list-sidebar.html">List with Sidebar</a></li>
-                      <li><a class="dropdown-item" href="blog-list.html">List no Sidebar</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Blog
-                      Grid Layouts</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="blog-grid-sidebar.html">Grid with Sidebar</a></li>
-                      <li><a class="dropdown-item" href="blog-grid.html">Grid no Sidebar</a></li>
-                    </ul>
-                  </li>
-                  <li class="dropdown"><a class="dropdown-item dropdown-toggle" href="#" data-toggle="dropdown">Single
-                      Post Layouts</a>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="blog-single-sidebar.html">Article with Sidebar</a></li>
-                      <li><a class="dropdown-item" href="blog-single.html">Article no Sidebar</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </li> -->
-              <!-- <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">Docs /
-                  Components</a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="docs/dev-setup.html">
-                      <div class="d-flex">
-                        <div class="lead text-muted pt-1"><i class="czi-book"></i></div>
-                        <div class="ml-2"><span class="d-block text-heading">Documentation</span><small
-                            class="d-block text-muted">Kick-start customization</small></div>
-                      </div>
-                    </a></li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="https://cartzilla.createx.studio/components/typography.html">
-                      <div class="d-flex">
-                        <div class="lead text-muted pt-1"><i class="czi-server"></i></div>
-                        <div class="ml-2"><span class="d-block text-heading">Components<span
-                              class="badge badge-info ml-2">40+</span></span><small class="d-block text-muted">Faster
-                            page building</small></div>
-                      </div>
-                    </a></li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="https://cartzilla.createx.studio/docs/changelog.html">
-                      <div class="d-flex">
-                        <div class="lead text-muted pt-1"><i class="czi-edit"></i></div>
-                        <div class="ml-2"><span class="d-block text-heading">Changelog<span
-                              class="badge badge-success ml-2">v1.4</span></span><small
-                            class="d-block text-muted">Regular updates</small></div>
-                      </div>
-                    </a></li>
-                  <li class="dropdown-divider"></li>
-                  <li><a class="dropdown-item" href="mailto:contact@createx.studio">
-                      <div class="d-flex">
-                        <div class="lead text-muted pt-1"><i class="czi-help"></i></div>
-                        <div class="ml-2"><span class="d-block text-heading">Support</span><small
-                            class="d-block text-muted">contact@createx.studio</small></div>
-                      </div>
-                    </a></li>
-                </ul>
-              </li> -->
             </ul>
           </div>
         </div>
       </div>
     </div>
+   
   </header>
+
   {% render 'breadcrumbs' %}
 
   <!-- <h1>Links</h1>
@@ -369,12 +242,14 @@
     <a href="{{ link.url }}">{{ link.title }}</a>
   </li>
   {% endfor %} -->
+  {% render 'sidenav' %}
 
-
-  <main role="main">
+  <main role="main" class="sidebar-fixed-enabled" style="padding-top: 15rem;">
     {{ content_for_layout }}
+
+    {% section 'footer' %}
   </main>
-  {% section 'footer' %}
+
 </body>
 
 </html>
