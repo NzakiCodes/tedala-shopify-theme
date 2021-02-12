@@ -1,0 +1,74 @@
+<!-- Dark footer -->
+<footer class="bg-dark pt-5">
+    <div class="container pt-5 bg-darker">
+        <div class="container">
+            <div class="row pb-3">
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="media">
+                        <i class="czi-rocket text-primary" style="font-size: 2.25rem;"></i>
+                        <div class="media-body pl-3">
+                            <h6 class="font-size-base text-light mb-1">Fast and free delivery</h6>
+                            <p class="mb-0 font-size-ms text-light opacity-50">Free delivery for all orders over $200
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="media">
+                        <i class="czi-currency-exchange text-primary" style="font-size: 2.25rem;"></i>
+                        <div class="media-body pl-3">
+                            <h6 class="font-size-base text-light mb-1">Money back guarantee</h6>
+                            <p class="mb-0 font-size-ms text-light opacity-50">We return money within 30 days</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="media">
+                        <i class="czi-support text-primary" style="font-size: 2.25rem;"></i>
+                        <div class="media-body pl-3">
+                            <h6 class="font-size-base text-light mb-1">24/7 customer support</h6>
+                            <p class="mb-0 font-size-ms text-light opacity-50">Friendly 24/7 customer support</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-sm-6 mb-4">
+                    <div class="media">
+                        <i class="czi-card text-primary" style="font-size: 2.25rem;"></i>
+                        <div class="media-body pl-3">
+                            <h6 class="font-size-base text-light mb-1">Secure online payment</h6>
+                            <p class="mb-0 font-size-ms text-light opacity-50">We possess SSL / Secure сertificate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-light pb-4 mb-3">
+            <div class="row pb-2">
+                <div class="col-md-6 text-center text-md-left mb-4">
+                    <div class="text-nowrap mb-4">
+                        <a class="d-inline-block align-middle mt-n1 mr-3" href="#">
+                            <img class="d-block" width="117" src="https://cdn.shopify.com/s/files/1/0261/1340/9060/files/TedalaMarket_Approved_logo_Transparent_1.png?v=1595012870" alt="Tedala Market" />
+                        </a>
+                        
+                    </div>
+                    <div class="widget widget-links widget-light">
+                        <ul class="widget-list d-flex flex-wrap justify-content-center justify-content-md-start">
+                           
+
+                            {% for link in linklists.footer.links %}
+                            <li class=" widget-list-itemmr-4 mx-2" >
+                              <a class="widget-list-link" href="{{ link.url }}">{{ link.title }}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6 text-center text-md-right mb-4">
+                  <img class="d-inline-block" width="187" src="{{'cards-alt.png' | asset_url }}" alt="Payment methods" />
+                </div>
+            </div>
+            <div class="pb-4 font-size-xs text-light opacity-50 text-center text-md-left">© All rights reserved.
+                <a class="text-light" href="/">TedalaMarket</a>
+            </div>
+        </div>
+    </div>
+</footer>

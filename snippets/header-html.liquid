@@ -1,0 +1,25 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <title>{{ page_title }}</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="{{ page_description | escape }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+    <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
+
+    <link rel="stylesheet" media="screen" href="{{'simplebar.min.css' | asset_url }}" />
+    <link rel="stylesheet" media="screen" href="{{'tiny-slider.css' | asset_url }}" />
+    <link rel="stylesheet" media="screen" href="{{ 'nouislider.cs'| asset_url }}" />
+    <link rel="stylesheet" media="screen" href="{{ 'drift-basic.min.css' | asset_url }}" />
+    <link rel="stylesheet" media="screen" href="{{ 'theme.min.css' | asset_url }}" />
+
+    <link rel="shortcut icon"
+        href="https://cdn.shopify.com/s/files/1/0261/1340/9060/files/TedalaMarket_Approved_logo_Transparent_1.png?v=1595012870"
+        type="image/x-icon">
+    {{ 'application.css' | asset_url | stylesheet_tag }}
+    {{ 'application.js' | asset_url | script_tag }}
+    <script src="{{ 'Wishlist.js' | asset_url }}" defer="defer"></script>
+    {{ content_for_header }}
+</head>
