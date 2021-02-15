@@ -1,9 +1,22 @@
 {% include 'header-html' %}
 {{content_for_header}}
 {% include 'header' %}
+<!-- Sidebar menu-->
+<aside  class="offcanvas offcanvas-expand w-100 border-end zindex-lg-5 pt-lg-5" id="sideNav"
+    style="max-width: 21.875rem;">
+    {% include 'sidemenu' %}
+</aside>
+<!-- Main -->
+<main class="offcanvas-enabled" style="padding-top: 10rem;">
+    
+    <div class="container-fluid">
+        {% render 'breadcrumbs' %}
+      
 
-<main class="offcanvas-enabled" style="padding-top: 5rem;">
-{{content_for_layout}}
-{% include 'footer' %}
+
+
+        {{content_for_layout}}
+    </div>
+    {% include 'footer' %}
 </main>
 {% include 'footer-html' %}

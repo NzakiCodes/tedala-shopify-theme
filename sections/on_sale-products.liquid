@@ -1,10 +1,10 @@
 <!-- On Sales products (Carousel)-->
-<section class="container pt-4">
+<section class="container pt-lg-10 " id="on_sale">
   <!-- Heading-->
-  <div class="d-flex flex-wrap justify-content-between align-items-center pt-1 border-bottom pb-4 mb-4">
-    <h2 class="h3 mb-0 pt-3 mr-3">On Sales</h2>
+  <div class="d-flex flex-wrap justify-content-between align-items-center border-bottom pb-4 mb-4">
+    <h2 class="h3 mb-0 pt-3 mr-3">On Sale</h2>
     <div class="pt-3">
-      <a class="btn btn-outline-accent btn-sm" href="/products">More products
+      <a class="btn btn-outline-accent btn-sm" href="/products">More Products
         <i class="czi-arrow-right ml-1 mr-n1"></i>
       </a>
     </div>
@@ -22,11 +22,11 @@
         <a class="card-img-top d-block overflow-hidden" href="{{ product.url | within: collection }}">
           <img src="{{ product.featured_image.src | img_url: 'small' }}" alt="Product"></a>
         <div class="card-body py-2">
-          <span>
-            {% for collection in product.collections %}
-            {{ collection.title }}
-            {% endfor %}
-          </span>
+            <!-- <span>
+              {% for collection in product.collections %}
+              {{ collection.title }}
+              {% endfor %}
+            </span> -->
           <a class="product-meta d-block font-size-xs pb-1" href="#">{{ product.collections.title | capitalize}}</a>
           <h3 class="product-title font-size-sm">
             <a href="{{ product.url | within: collection }}">{{ product.title }}</a>

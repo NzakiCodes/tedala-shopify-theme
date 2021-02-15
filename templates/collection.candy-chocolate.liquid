@@ -1,17 +1,24 @@
-{% paginate collection.products by 8 %}
+<div class="container pb-3">
   <h1>{{ collection.title }}</h1>
-  {% for product in collection.products %}
-    <div>
-      <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-      {{ product.price | money }}
-      {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-      <a href="{{ product.url | within: collection }}">
-        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-      </a>
+  {% include 'slideshow1' %}
+  <div class="row  rounded-lg">
+    {% for product in collection.products  %}
+    {% assign grid_item_width = 'large--one-fifth medium--one-half' %}
+    <div class="col-xl-3 col-lg-4 col-md-4 col-sm-6 col-xs-6 py-1 px-3">
+      <div class="card text-center product-card pb-1 py-3 px-3">
+        {%- render 'button-wishlist', product: product -%}
+        <a href="{{ product.url | within: collection }}">
+          <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+        <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
+        {{ product.price | money }}
+        {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+      </div>
     </div>
-  {% else %}
-    <p>no matches</p>
-  {% endfor %}
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-{% endpaginate %}
+    {% endfor %}
+  
+  </div>
+</div>
 
+
+</section>

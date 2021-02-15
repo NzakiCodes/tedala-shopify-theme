@@ -1,0 +1,526 @@
+<div class="pt-2 d-none d-lg-block"></div>
+<ul class="nav nav-tabs nav-justified mt-4 mt-lg-5 mb-0" role="tablist" style="min-height: 3rem;">
+  <li class="nav-item"><a class="nav-link fw-medium active" href="#categories" data-bs-toggle="tab" role="tab">Categories</a></li>
+  <li class="nav-item"><a class="nav-link fw-medium" href="#menu" data-bs-toggle="tab" role="tab">Menu</a></li>
+  <li class="nav-item d-lg-none"><a class="nav-link fs-sm" href="#" data-bs-dismiss="offcanvas" role="tab"><i class="ci-close fs-xs me-2"></i>Close</a></li>
+</ul>
+<div class="offcanvas-body px-0 pt-3 pb-0" data-simplebar>
+  <div class="tab-content">
+    <!-- Categories-->
+    <div class="sidebar-nav tab-pane fade show active" id="categories" role="tabpanel" >
+      <div class="widget widget-categories">
+        <div class="accordion" id="shop-categories" style="text-transform: uppercase!important;">
+          <!-- Now In Season-->
+          <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+                <a class="nav-link-style d-block fs-md fw-normal py-3" href="/collections/now-in-season">
+                    <span class="d-flex align-items-center">
+                        <i class="ci-frozen fs-lg text-danger mt-n1 me-2"></i>NOW IN SEASON
+                    </span>
+                </a>
+            </h3>
+            
+        </div>
+                  <!-- New-->
+                  <div class="accordion-item border-bottom">
+                    <h3 class="accordion-header px-grid-gutter">
+                        <a class="nav-link-style d-block fs-md fw-normal py-3" href="/collections/new/">
+                            <span class="d-flex align-items-center">
+                                <i class="ci-lable fs-lg text-danger mt-n1 me-2"></i>NEW
+                            </span>
+                        </a>
+                    </h3>
+                    
+                </div>
+            <!-- Sale-->
+          <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+                <a class="nav-link-style d-block fs-md fw-normal py-3" href="/collections/sales/">
+                    <span class="d-flex align-items-center">
+                        <i class="ci-discount fs-lg text-danger mt-n1 me-2"></i>SALES
+                    </span>
+                </a>
+            </h3>
+            
+        </div>
+
+          <!-- Babies -->
+          <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#babies_kids" aria-expanded="false" aria-controls="babies_kids"><span class="d-flex align-items-center"> 
+                  <i class="ci-water-bottle fs-lg opacity-60 me-2"></i> Babies & Kids </span></button>
+            </h3>
+            <div class="collapse" id="babies_kids" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign baby-kids = collections | where: 'template_suffix','baby-kids' %}
+                  <ul class="widget-list">
+                        {% for collection in baby-kids %}
+                        <li class="widget-list-item">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title}}</a>
+                        </li>
+                        {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+           <!-- Beauty & Personal Care-->
+          <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#beauty_personal_care" aria-expanded="false" aria-controls="beauty_personal_care">
+                  <span class="d-flex align-items-center"><i class="ci-toothbrush fs-lg opacity-60 me-2"></i> Beauty & Personal Care</span>
+                </button>
+            </h3>
+            <div class="collapse" id="beauty_personal_care" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                   
+                  {% assign beauty_personal_care = collections | where: 'template_suffix','beauty-personal_care' %}
+                    <ul class="widget-list">
+                        {% for collection in beauty_personal_care %}
+                        <li class="widget-list-item">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <!-- Health and Wellness-->
+           <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#health_and_wellness" aria-expanded="false" aria-controls="health_and_wellness">
+                  <span class="d-flex align-items-center"><i class="ci-heart fs-lg opacity-60 me-2"></i> Health and Wellness</span>
+                </button>
+            </h3>
+            <div class="collapse" id="health_and_wellness" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                   
+                    {% assign health-wellness = collections | where: 'template_suffix','health-wellness' %}
+                    <ul class="widget-list">
+                        {% for collection in health-wellness %}
+                        <li class="widget-list-item">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!-- Beverages-->
+          <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#beverages" aria-expanded="false" aria-controls="beverages">
+                  <span class="d-flex align-items-center"><i class="ci-juice fs-lg opacity-60 me-2"></i>Beverages</span>
+                </button>
+            </h3>
+            <div class="collapse" id="beverages" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign beverages = collections | where: 'template_suffix','beverages' %}
+                    <ul class="widget-list">
+                        {% for collection in beverages %}
+                        <li class="widget-list-item ">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Candy & Chocolate-->
+          <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" type="button" data-bs-toggle="collapse" data-bs-target="#candy_chocolate" aria-expanded="false" aria-controls="candy_chocolate">
+                  <span class="d-flex align-items-center"><i class=" fs-lg opacity-60 me-2"></i>Candy & Chocolate</span>
+                </button>
+            </h3>
+            <div class="collapse" id="candy_chocolate" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign candy-chocolate = collections | where: 'template_suffix','candy-chocolate' %}
+                    <ul class="widget-list">
+                        {% for collection in candy-chocolate %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- Canned and Packaged Food-->
+           <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#canned_and_packaged_food" aria-expanded="false" aria-controls="canned_and_packaged_food">
+                  <span class="d-flex align-items-center"><i class="ci-canned-food fs-lg opacity-60 me-2"></i>Canned and Packaged Food</span>
+                </button>
+            </h3>
+            <div class="collapse" id="canned_and_packaged_food" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign canned-package-food = collections | where: 'template_suffix','canned-package-food' %}
+                    <ul class="widget-list">
+                        {% for collection in canned-package-food %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- Breakefast, Cereaks and Granolas-->
+           <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#breakefast_cereaks_and_granolas" 
+              aria-expanded="false" aria-controls="breakefast_cereaks_and_granolas">
+                  <span class="d-flex align-items-center"><i class="ci-corn fs-lg opacity-60 me-2"></i>Breakefast, Cereaks, Granolas</span>
+                </button>
+            </h3>
+            <div class="collapse" id="breakefast_cereaks_and_granolas" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign breakfast-cereals-granolas = collections | where: 'template_suffix','breakfast-cereals-granolas' %}
+                    <ul class="widget-list">
+                        {% for collection in breakfast-cereals-granolas %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Condiments & Sauces-->
+          <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#condiments_sauces" 
+              aria-expanded="false" aria-controls="condiments_sauces">
+                  <span class="d-flex align-items-center"><i class="ci-fish fs-lg opacity-60 me-2"></i>Condiments & Sauces</span>
+                </button>
+            </h3>
+            <div class="collapse" id="condiments_sauces" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign condiments-sauces = collections | where: 'template_suffix','condiments-sauces' %}
+                    <ul class="widget-list">
+                        {% for collection in condiments-sauces %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+           <!-- Dried Fish & Stock Fish-->
+           <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#dried_fish_stockfish" 
+              aria-expanded="false" aria-controls="dried_fish_stockfish">
+                  <span class="d-flex align-items-center"><i class="ci-fish fs-lg opacity-60 me-2"></i>Dried Fish & StockhFish</span>
+                </button>
+            </h3>
+            <div class="collapse" id="dried_fish_stockfish" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign dried_fish_stockfish = collections | where: 'template_suffix','dried-fish-stockfish' %}
+                    <ul class="widget-list">
+                        {% for collection in dried_fish_stockfish %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+           <!-- Pantry-->
+           <div class="accordion-item border-bottom">
+            <h3 class="accordion-header px-grid-gutter">
+              <button class="accordion-button collapsed py-3" 
+              type="button" data-bs-toggle="collapse" data-bs-target="#pantry" 
+              aria-expanded="false" aria-controls="pantry">
+                  <span class="d-flex align-items-center"><i class="ci-pot fs-lg opacity-60 me-2"></i>Pantry</span>
+                </button>
+            </h3>
+            <div class="collapse" id="pantry" data-bs-parent="#shop-categories">
+              <div class="px-grid-gutter pt-1 pb-4">
+                <div class="widget widget-links">
+                    {% assign pantry = collections | where: 'template_suffix','pantry' %}
+                    <ul class="widget-list">
+                        {% for collection in pantry %}
+                        <li class="widget-list-item pb-1">
+                            <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <!-- Grains and Pasta-->
+            <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                  <button class="accordion-button collapsed py-3" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#grains_pasta" 
+                  aria-expanded="false" aria-controls="grains_pasta">
+                      <span class="d-flex align-items-center">
+                          <i class="ci-corn fs-lg opacity-60 me-2"></i>Grains and Pasta</span>
+                    </button>
+                </h3>
+                <div class="collapse" id="grains_pasta" data-bs-parent="#shop-categories">
+                  <div class="px-grid-gutter pt-1 pb-4">
+                    <div class="widget widget-links">
+                        {% assign grains-pasta = collections | where: 'template_suffix','grains-pasta' %}
+                        <ul class="widget-list">
+                            {% for collection in grains-pasta %}
+                            <li class="widget-list-item pb-1">
+                                <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+             <!-- Honey and Sweetners-->
+            <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                  <button class="accordion-button collapsed py-3" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#honey_sweetners" 
+                  aria-expanded="false" aria-controls="honey_sweetners">
+                      <span class="d-flex align-items-center">
+                          <i class="ci-pot fs-lg opacity-60 me-2"></i>Honey and Sweetners</span>
+                    </button>
+                </h3>
+                <div class="collapse" id="honey_sweetners" data-bs-parent="#shop-categories">
+                  <div class="px-grid-gutter pt-1 pb-4">
+                    <div class="widget widget-links">
+                        {% assign honey-sweeteners = collections | where: 'template_suffix','honey-sweeteners' %}
+                        <ul class="widget-list">
+                            {% for collection in honey-sweeteners %}
+                            <li class="widget-list-item pb-1">
+                                <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+             <!-- Oil & Vinegars-->
+             <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                  <button class="accordion-button collapsed py-3" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#oils_vinegars" 
+                  aria-expanded="false" aria-controls="oils_vinegars">
+                      <span class="d-flex align-items-center">
+                          <i class="ci-canned-food fs-lg opacity-60 me-2"></i>Oil & Vinegars</span>
+                    </button>
+                </h3>
+                <div class="collapse" id="oils_vinegars" data-bs-parent="#shop-categories">
+                  <div class="px-grid-gutter pt-1 pb-4">
+                    <div class="widget widget-links">
+                        {% assign honey-sweeteners = collections | where: 'template_suffix','honey-sweeteners' %}
+                        <ul class="widget-list">
+                            {% for collection in honey-sweeteners %}
+                            <li class="widget-list-item pb-1">
+                                <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Meat & Seafood-->
+             <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                  <button class="accordion-button collapsed py-3" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#meat_seafood" 
+                  aria-expanded="false" aria-controls="meat_seafood">
+                      <span class="d-flex align-items-center">
+                          <i class="ci-canned-food fs-lg opacity-60 me-2"></i>Meat & Seafood</span>
+                    </button>
+                </h3>
+                <div class="collapse" id="meat_seafood" data-bs-parent="#shop-categories">
+                  <div class="px-grid-gutter pt-1 pb-4">
+                    <div class="widget widget-links">
+                        {% assign meat-seafood = collections | where: 'template_suffix','meat-seafood' %}
+                        <ul class="widget-list">
+                            {% for collection in meat-seafood %}
+                            <li class="widget-list-item pb-1">
+                                <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            <!-- Snacks-->
+             <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                  <button class="accordion-button collapsed py-3" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#snacks" 
+                  aria-expanded="false" aria-controls="snacks">
+                      <span class="d-flex align-items-center">
+                          <i class="ci-ice-cream fs-lg opacity-60 me-2"></i>Snacks</span>
+                    </button>
+                </h3>
+                <div class="collapse" id="snacks" data-bs-parent="#shop-categories">
+                  <div class="px-grid-gutter pt-1 pb-4">
+                    <div class="widget widget-links">
+                        {% assign snacks = collections | where: 'template_suffix','snacks' %}
+                        <ul class="widget-list">
+                            {% for collection in snacks %}
+                            <li class="widget-list-item pb-1">
+                                <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+            <!-- Spice, Seasoning & Salt-->
+            <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                  <button class="accordion-button collapsed py-3" 
+                  type="button" data-bs-toggle="collapse" data-bs-target="#spice_seasoning_salt" 
+                  aria-expanded="false" aria-controls="spice_seasoning_salt">
+                      <span class="d-flex align-items-center">
+                          <i class="ci-fish fs-lg opacity-60 me-2"></i>Spice, Seasoning & Salt</span>
+                    </button>
+                </h3>
+                <div class="collapse" id="spice_seasoning_salt" data-bs-parent="#shop-categories">
+                  <div class="px-grid-gutter pt-1 pb-4">
+                    <div class="widget widget-links">
+                        {% assign spice-seasoning-salt = collections | where: 'template_suffix','spice-seasoning-salt' %}
+                        <ul class="widget-list">
+                            {% for collection in spice-seasoning-salt %}
+                            <li class="widget-list-item pb-1">
+                                <a class="widget-list-link" href="{{ collection.url }}"> {{collection.title | capitalize}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+
+        </div>
+      </div>
+    </div>
+    <!-- Menu-->
+    <div class="sidebar-nav tab-pane fade" id="menu" role="tabpanel">
+      <div class="widget widget-categories">
+        <div class="accordion" id="shop-menu">
+            <!-- Pages -->
+
+            <!-- Home -->
+            <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                    <a class="nav-link-style d-block fs-md fw-normal py-3" href="/">
+                        <span class="d-flex align-items-center">
+                            <i class="ci-home fs-lg text-danger mt-n1 me-2"></i>Home
+                        </span>
+                    </a>
+                </h3>
+                
+            </div>
+
+             <!-- About -->
+             <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                    <a class="nav-link-style d-block fs-md fw-normal py-3" href="/pages/about-us">
+                        <span class="d-flex align-items-center">
+                            About Us
+                        </span>
+                    </a>
+                </h3>
+                
+            </div>
+              <!-- Contact -->
+              <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                    <a class="nav-link-style d-block fs-md fw-normal py-3" href="/pages/contact-us">
+                        <span class="d-flex align-items-center">
+                            Contact Us
+                        </span>
+                    </a>
+                </h3>
+                
+            </div>
+
+              <!-- Wishlist-->
+              <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                    <a class="nav-link-style d-block fs-md fw-normal py-3" href="/pages/wishlist">
+                        <span class="d-flex align-items-center">
+                            Wishlist
+                        </span>
+                    </a>
+                </h3>
+                
+            </div>
+            <div class="accordion-item border-bottom">
+                <h3 class="accordion-header px-grid-gutter">
+                    <a class="nav-link-style d-block fs-md fw-normal py-3" href="/pages/faqs">
+                        <span class="d-flex align-items-center">
+                        FAQs
+                        </span>
+                    </a>
+                </h3>
+                
+            </div>
+
+            
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="offcanvas-cap d-block px-grid-gutter pt-3 pb-4 mb-2">
+  <!-- <div class="d-flex mb-3"><i class="ci-support h4 mb-0 fw-normal text-primary mt-1 me-1"></i>
+    <div class="ps-2">
+      <div class="text-muted fs-sm">Support</div><a class="nav-link-style fs-md" href="tel:+100331697720">+1 (00) 33 169 7720</a>
+    </div>
+  </div>
+  <div class="d-flex mb-3"><i class="ci-mail h5 mb-0 fw-normal text-primary mt-1 me-1"></i>
+    <div class="ps-2">
+      <div class="text-muted fs-sm">Email</div><a class="nav-link-style fs-md" href="mailto:customer@example.com">customer@example.com</a>
+    </div>
+  </div> -->
+  <h6 class="pt-2 pb-1">Follow us</h6><a class="btn-social bs-outline bs-twitter me-2 mb-2" href="#"><i class="ci-twitter"></i></a><a class="btn-social bs-outline bs-facebook me-2 mb-2" href="#"><i class="ci-facebook"></i></a><a class="btn-social bs-outline bs-instagram me-2 mb-2" href="#"><i class="ci-instagram"></i></a><a class="btn-social bs-outline bs-youtube me-2 mb-2" href="#"><i class="ci-youtube"></i></a>
+</div>
